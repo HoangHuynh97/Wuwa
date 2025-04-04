@@ -16,6 +16,7 @@ const puerts_1 = require("puerts"),
   KillAura_1 = require("./Manager/ModFuncs/KillAura"),
   MobVacuum_1 = require("./Manager/ModFuncs/MobVacuum"),
   AutoDestroy_1 = require("./Manager/ModFuncs/AutoDestroy"),
+  EventListener_1 = require("./Manager/ModFuncs/EventListener"),
   UiManager_1 = require("./Ui/UiManager"),
   AutoPuzzle_1 = require("./Manager/ModFuncs/AutoPuzzle"),
   PerceptionRange_1 = require("./Manager/ModFuncs/PerceptionRange"),
@@ -77,6 +78,7 @@ class MainMenu {
     } catch (error) {
       ModManager_1.ModManager.Settings.HasCustomTpFile = false;
     }
+
     if (IS_INVALID) return;*/
 
     ModManager_1.ModManager.listenModsToggle();
@@ -88,11 +90,12 @@ class MainMenu {
       /*if (this.isMenuShow) {
         ModelManager_1.ModelManager.LoadingModel.SetIsLoadingView(false);
         ModelManager_1.ModelManager.LoadingModel.SetIsLoading(false);
-        this.Menu.SetVisibility(2);
+        this.Menu.PlayAnimClose();
       } else {
         ModelManager_1.ModelManager.LoadingModel.SetIsLoadingView(true);
         ModelManager_1.ModelManager.LoadingModel.SetIsLoading(true);
         this.Menu.SetVisibility(0);
+        this.Menu.PlayAnimOpen();
       }
       this.isMenuShow = !this.isMenuShow;*/
     }
@@ -118,47 +121,45 @@ class MainMenu {
         );
 
         if (this.Menu) {
-            DCG = UE.UMGManager.CreateWidget(
-                GlobalData_1.GlobalData.World,
-                ResourceSystem_1.ResourceSystem.Load("/Game/Aki/DCG.DCG_C", UE.Class)
-            );
+            // DCG = UE.UMGManager.CreateWidget(
+            //     GlobalData_1.GlobalData.World,
+            //     ResourceSystem_1.ResourceSystem.Load("/Game/Aki/DCG.DCG_C", UE.Class)
+            // );
 
             // 确保必要的UI组件和资源加载
-            if (this.Menu && DCG) {
-                this.isMenuLoaded = true;
-                clearInterval(this.loadMenuInterval);
+            // if (this.Menu && DCG) {
+            this.isMenuLoaded = true;
+            clearInterval(this.loadMenuInterval);
 
-                setInterval(() => {
-                    MainMenu.ListenKey();
-                }, 1);
-                setInterval(() => {
-                    ModEntityListener.Runtime();
-                }, 1500);
-                setInterval(() => {
-                    ModEntityListener.FasterRuntime();
-                }, 100);
-                setInterval(() => {
-                    ESP_1.ESP.RuntimeESP();
-                }, ESP_1.ESP.ESP_INTERVAL);
+            setInterval(() => {
+                MainMenu.ListenKey();
+            }, 1);
+            setInterval(() => {
+                ModEntityListener.Runtime();
+            }, 500);
+            setInterval(() => {
+                ModEntityListener.FasterRuntime();
+            }, 100);
+            setInterval(() => {
+                ESP_1.ESP.RuntimeESP();
+            }, ESP_1.ESP.ESP_INTERVAL);
+            // setTimeout(() => {
+            //     const Listener = new EventListener_1.EventListener();
+            //     Listener.Setup();
+            // }, 30000);
 
-                // 加载必要的资源和设置
-                DCG.Image_26.SetBrushFromTexture(
-                    ResourceSystem_1.ResourceSystem.Load(
-                        "/Game/Aki/Changli.Changli",
-                        UE.Texture
-                    )
-                );
+            // 加载必要的资源和设置
 
-                DCG.ErrorMessage.SetText("");
+            // DCG.ErrorMessage.SetText("");
 
-                // 直接加载真实菜单
-                this.LoadRealMenu();
-            } else {
-                // 若必要组件未加载，则记录错误
-                //console.error("必要的UI组件或资源加载失败。");
-                this.isMenuLoaded = true;
-                clearInterval(this.loadMenuInterval);
-            }
+            // 直接加载真实菜单
+            this.LoadRealMenu();
+            // } else {
+            //     // 若必要组件未加载，则记录错误
+            //     console.error("必要的UI组件或资源加载失败。");
+            //     this.isMenuLoaded = true;
+            //     clearInterval(this.loadMenuInterval);
+            // }
         }
     }
 }
@@ -185,7 +186,7 @@ class MainMenu {
     ModelManager_1.ModelManager.LoadingModel.SetIsLoadingView(false);
     ModelManager_1.ModelManager.LoadingModel.SetIsLoading(false);
     DiscordGrant_1.DiscordGrant.SaveToken();
-    DCG.SetVisibility(2);
+    // DCG.SetVisibility(2);
     IS_INVALID = false;
 
     //check if config exists
@@ -196,7 +197,6 @@ class MainMenu {
     }
 
     this.Menu.DiscordLink.SetVisibility(0);
-    this.Menu.GithubLink.SetVisibility(0);
     this.Menu.DisclaimerText.SetVisibility(0);
 
     ESP_1.ESP.ESPCanvas = UE.UMGManager.CreateWidget(
@@ -208,20 +208,6 @@ class MainMenu {
     ESP_1.ESP.ESPCanvas.SetVisibility(0);
 
     try {
-      this.Menu.ModImage.SetBrushFromTexture(
-        ResourceSystem_1.ResourceSystem.Load(
-          "/Game/Aki/Changli.Changli",
-          UE.Texture
-        )
-      );
-
-      this.Menu.TitleBar.SetBrushFromTexture(
-        ResourceSystem_1.ResourceSystem.Load(
-          "/Game/Aki/Gradient.Gradient",
-          UE.Texture
-        )
-      );
-
       this.updateMenuState();
       this.getTranslation();
 
@@ -286,7 +272,7 @@ class MainMenu {
       });
 
       this.Menu.KillAuraCheck.OnCheckStateChanged.Add((isChecked) => {
-        ModManager_1.ModManager.Settings.hitAll = isChecked;
+        ModManager_1.ModManager.Settings.HitAll = isChecked;
         //this.KunLog("Hit All: " + isChecked);
       });
 
@@ -364,7 +350,7 @@ class MainMenu {
 
       /*this.Menu.SaveConfigButton.OnClicked.Add(() => {
         ModManager_1.ModManager.SaveConfig();
-        //this.KunLog("Config Saved!");
+        this.KunLog("Config Saved!");
       });*/
 
       this.Menu.HideHUDCheck.OnCheckStateChanged.Add((isChecked) => {
@@ -748,7 +734,6 @@ class MainMenu {
         ModLanguage_1.ModLanguage.ModTr("TEXT_CONSOLE_COMMAND")
       );
 
-      this.Menu.Designer.SetText(ModLanguage_1.ModLanguage.ModTr("TEXT_DESIGNER"));
       this.Menu.DisclaimerText.SetText(this.Getfreetip());
       this.Menu.LanguageText.SetText(ModLanguage_1.ModLanguage.ModTr("TEXT_LANGUAGE"));
     }
@@ -797,7 +782,7 @@ class MainMenu {
       this.Menu.AutoPickTreasureCheck.SetIsChecked(
         ModManager_1.ModManager.Settings.AutoPickTreasure
       );
-      this.Menu.KillAuraCheck.SetIsChecked(ModManager_1.ModManager.Settings.hitAll);
+      this.Menu.KillAuraCheck.SetIsChecked(ModManager_1.ModManager.Settings.HitAll);
       this.Menu.AutoLootCheck.SetIsChecked(ModManager_1.ModManager.Settings.AutoLoot);
       this.Menu.KillAnimalCheck.SetIsChecked(ModManager_1.ModManager.Settings.KillAnimal);
       this.Menu.PerceptionRangeCheck.SetIsChecked(
@@ -858,17 +843,17 @@ class MainMenu {
   }
 
   static updatePlayerSpeed() {
-    if (ModManager_1.ModManager.Settings.PlayerSpeed) {
+    //if (ModManager_1.ModManager.Settings.PlayerSpeed) {
       EntityManager_1.EntityManager.SetPlayerSpeed(ModManager_1.ModManager.Settings.playerSpeedValue);
-    }
+    //}
   }
 
   static updateWorldSpeed() {
-    if (ModManager_1.ModManager.Settings.WorldSpeed) {
+    //if (ModManager_1.ModManager.Settings.WorldSpeed) {
       ModMethod_1.ModMethod.SetWorldTimeDilation(
         ModManager_1.ModManager.Settings.WorldSpeedValue
       );
-    }
+    //}
   }
 
   static updateNoClip() {

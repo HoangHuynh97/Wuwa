@@ -8,6 +8,7 @@ const puerts_1 = require("puerts"),
   Info_1 = require("../../Core/Common/Info"),
   Log_1 = require("../../Core/Common/Log"),
   Protocol_1 = require("../../Core/Define/Net/Protocol"),
+  ControllerManager_1 = require("../Manager/ControllerManager"),
   InputSettings_1 = require("../InputSettings/InputSettings"),
   TeleportController_1 = require("../Module/Teleport/TeleportController"),
   CreatureController_1 = require("../World/Controller/CreatureController"),
@@ -26,7 +27,7 @@ const puerts_1 = require("puerts"),
   ModLanguage_1 = require("./ModFuncs/ModLanguage"),
   MobVacuum_1 = require("./ModFuncs/MobVacuum"),
   keys_State = {},
-  ConfigFileName = "cfg.json";
+  ConfigFileName = "mod/cfg.json";
   
 class ModManager {
   constructor() {
@@ -111,7 +112,7 @@ class ModManager {
   // please set all settings to false, preventing unverified users
 
   static GetGameDir() {
-    return UE.BlueprintPathsLibrary.ProjectDir() + "Binaries/Win64/mod/";
+    return UE.BlueprintPathsLibrary.ProjectDir() + "Binaries/Win64/";
   }
 
   static CheckConfigExists() {
@@ -155,34 +156,34 @@ class ModManager {
   }
 
   static ModStart() {
-    this.AddToggle("GodMode", "F1");
+    this.AddToggle("GodMode", "master");
     this.AddToggle("HitMultiplier", "master");
-    this.AddToggle("AutoPickTreasure", "F4");
-    this.AddToggle("AutoAbsorbnew", "F3");
-    this.AddToggle("killAuranew", "F10");
-    this.AddToggle("PerceptionRange", "F6");
-    this.AddToggle("NoCD", "F5");
-    this.AddToggle("PlayerSpeed", "F8");
-    this.AddToggle("WorldSpeed", "F9");
-    this.AddToggle("PlotSkip", "F7");
-    this.AddToggle("AutoDestroy", "F11");
-    this.AddToggle("AutoLoot", "F12");
+    this.AddToggle("AutoPickTreasure", "master");
+    this.AddToggle("AutoAbsorbnew", "master");
+    this.AddToggle("killAuranew", "master");
+    this.AddToggle("PerceptionRange", "master");
+    this.AddToggle("NoCD", "master");
+    this.AddToggle("PlayerSpeed", "master");
+    this.AddToggle("WorldSpeed", "master");
+    this.AddToggle("PlotSkip", "master");
+    this.AddToggle("AutoDestroy", "master");
+    this.AddToggle("AutoLoot", "master");
   }
 
   static listenModsToggle() {
-    this.listenMod("GodMode", "F1", "GodMode");
+    this.listenMod("GodMode", "master", "GodMode");
     this.listenMod("HitMultiplier", "master", "HitMultiplier");
 
-    this.listenMod("AutoPickTreasure", "F4", "AutoPickTreasure");
-    this.listenMod("AutoAbsorbnew", "F3", "AutoAbsorbnew");
-    this.listenMod("killAuranew", "F10", "killAuranew");
-    this.listenMod("PerceptionRange", "F6", "PerceptionRange");
-    this.listenMod("NoCD", "F5", "NoCD");
-    this.listenMod("PlotSkip", "F7", "PlotSkip");
-    this.listenMod("AutoDestroy", "F11", "AutoDestroy");
-    this.listenMod("AutoLoot", "F12", "AutoLoot");
+    this.listenMod("AutoPickTreasure", "master", "AutoPickTreasure");
+    this.listenMod("AutoAbsorbnew", "master", "AutoAbsorbnew");
+    this.listenMod("killAuranew", "master", "killAuranew");
+    this.listenMod("PerceptionRange", "master", "PerceptionRange");
+    this.listenMod("NoCD", "master", "NoCD");
+    this.listenMod("PlotSkip", "master", "PlotSkip");
+    this.listenMod("AutoDestroy", "master", "AutoDestroy");
+    this.listenMod("AutoLoot", "master", "AutoLoot");
 
-    if (this.listenMod("PlayerSpeed", "F8", "PlayerSpeed")) {
+    if (this.listenMod("PlayerSpeed", "master", "PlayerSpeed")) {
       if (this.Settings.PlayerSpeed) {
         EntityManager_1.EntityManager.SetPlayerSpeed(5);
       } else {
@@ -222,9 +223,15 @@ class ModManager {
         ModCustomTp_1.ModCustomTp.GoTp();
       }
     }
+
+    this.listenMod("AutoLoot", "NumPadZero", "AutoLoot");
+    this.listenMod("AutoDestroy", "NumPadOne", "AutoDestroy");
     // ModDebuger_1.ModDebuger.EnableDebug();
     // if (ModDebuger_1.ModDebuger.Setting.EnableDebug) {
     //   ModDebuger_1.ModDebuger.ListenDebug();
+    // }
+
+    // if (this.listenKey("TestKey", "k")) {
     // }
 
     if (this.Settings.MarkTp && ModUtils_1.ModUtils.IsInMapView()) {
