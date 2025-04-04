@@ -25,8 +25,9 @@ const puerts_1 = require("puerts"),
   NoClip_1 = require("./ModFuncs/NoClip"),
   ModLanguage_1 = require("./ModFuncs/ModLanguage"),
   MobVacuum_1 = require("./ModFuncs/MobVacuum"),
+  ModMethod_1 = require("./ModFuncs/ModMethod"),
   keys_State = {},
-  ConfigFileName = "cfg.json";
+  ConfigFileName = "KunModConfig.json";
   
 class ModManager {
   constructor() {
@@ -34,102 +35,102 @@ class ModManager {
   }
   static Settings = {
     ModEnabled: true,
-    GodMode: false,
-    HitMultiplier: false,
-    Hitcount: 10,
-    AutoPickTreasure: false,
-    //AntiDither: false,
-    NoCD: false,
-    //InfiniteStamina: false,
-    //hitAll: false,
-    //killAuraState: 0, //0 Only Hatred  1 Infinity
-    PerceptionRange: false,
-    //MarkTp: false,
-    //MarkX: 0,
-    //MarkY: 0,
-    //MarkZ: 0,
-    //MarkTpPosZ: 300,
-    //CustomTp: false,
-    //HasCustomTpFile: false,
-    playerSpeedValue: 3,
+    GodMode: true,
+    HitMultiplier: true,
+    Hitcount: 15,
+    AutoPickTreasure: true,
+    AntiDither: false,
+    NoCD: true,
+    InfiniteStamina: false,
+    hitAll: false,
+    killAuraState: 0, //0 Only Hatred  1 Infinity
+    PerceptionRange: true,
+    MarkTp: false,
+    MarkX: 0,
+    MarkY: 0,
+    MarkZ: 0,
+    MarkTpPosZ: 300,
+    CustomTp: false,
+    HasCustomTpFile: false,
+    playerSpeedValue: 5,
     PlayerSpeed: false,
-    AutoLoot: false,
-    //HideHUD: false,
-    //HideDmgUi: false,
+    AutoLoot: true,
+    HideHUD: false,
+    HideDmgUi: false,
     //test
-    //DebugEntity: false, //(if use entity func need enable)
-    AutoDestroy: false,
-    killAuranew: false,
-    killAuraRadius: 500,
-    //KillAnimal: false,
-    AutoAbsorbnew: false,
-    //AutoChest: false,
-    //WeatherChanger: false,
-    //WeatherType: 1,
+    DebugEntity: false, //(if use entity func need enable)
+    AutoDestroy: true,
+    killAuranew: true,
+    killAuraRadius: 300,
+    KillAnimal: false,
+    AutoAbsorbnew: true,
+    AutoChest: false,
+    WeatherChanger: false,
+    WeatherType: 1,
     WorldSpeed: false,
-    WorldSpeedValue: 3,
-    PlotSkip: false
-    //MobVacuum: false,
-    //VacuumCollect: false,
-    //VacuumRadius: 200,
-    //AttributeModifier: false,
-    //Uid: "999999999",
-    //Language: "English",
-    //ESP: false,
-    //ESPRadius: 300,
-    //ShowMonster: false,
-    //ShowAnimal: false,
-    //ShowNpc: false,
-    //ShowTreasure: false,
-    //ShowCollect: false,
-    //ShowPuzzle: false,
-    //ShowCasket: false,
-    //ShowMutterfly: false,
-    //ShowRock: false,
-    //ShowBlobfly: false,
-    //ShowBox: false,
-    //ShowEntityId: false,
-    //ShowDistance: false,
-    //ShowName: false,
-    //ShowUnkown: false,
-    //FPSUnlocker: false,
-    //ShowFPS: false,
-    //FOV: false,
-    //FOVValue: 60, // default
-    //NoClip: false,
-    //AutoPuzzle: true,
-    //ShowType: false,
-    //AutoTeleport: false,
-    //AutoSonanceCasket: false,
-    //QuestTp: false,
-    //QuestX: 0,
-    //QuestY: 0,
-    //QuestZ: 0,
-    //AlwaysCrit: false
+    WorldSpeedValue: 1,
+    PlotSkip: true,
+    MobVacuum: false,
+    VacuumCollect: false,
+    VacuumRadius: 200,
+    AttributeModifier: false,
+    Uid: "9999999",
+    Language: "English",
+    ESP: false,
+    ESPRadius: 300,
+    ShowMonster: false,
+    ShowAnimal: false,
+    ShowNpc: false,
+    ShowTreasure: false,
+    ShowCollect: false,
+    ShowPuzzle: false,
+    ShowCasket: false,
+    ShowMutterfly: false,
+    ShowRock: false,
+    ShowBlobfly: false,
+    ShowBox: false,
+    ShowEntityId: false,
+    ShowDistance: false,
+    ShowName: false,
+    ShowUnkown: false,
+    FPSUnlocker: false,
+    ShowFPS: false,
+    FOV: false,
+    FOVValue: 60, // default
+    NoClip: false,
+    AutoPuzzle: false,
+    ShowType: false,
+    AutoTeleport: false,
+    AutoSonanceCasket: false,
+    QuestTp: false,
+    QuestX: 0,
+    QuestY: 0,
+    QuestZ: 0,
+    AlwaysCrit: false
   };
 
   // please set all settings to false, preventing unverified users
 
   static GetGameDir() {
-    return UE.BlueprintPathsLibrary.ProjectDir() + "Binaries/Win64/mod/";
+    return UE.BlueprintPathsLibrary.ProjectDir() + "Binaries/Win64/";
   }
 
   static CheckConfigExists() {
-    const config = UE.BlueprintPathsLibrary.FileExists(
+    /*const config = UE.BlueprintPathsLibrary.FileExists(
       this.GetGameDir() + ConfigFileName
     );
-    return config;
+    return config;*/
   }
 
   static SaveConfig() {
-    UE.KuroStaticLibrary.SaveStringToFile(
+    /*UE.KuroStaticLibrary.SaveStringToFile(
       JSON.stringify(this.Settings),
       this.GetGameDir() + ConfigFileName
-    );
+    );*/
   }
 
   static LoadConfig() {
-    let Config = puerts_1.$ref(undefined);
+    /*let Config = puerts_1.$ref(undefined);
     UE.KuroStaticLibrary.LoadFileToString(
       Config,
       this.GetGameDir() + ConfigFileName
@@ -148,10 +149,10 @@ class ModManager {
     }
     Config.VacuumRadius !== this.Settings.VacuumRadius ? (Config.VacuumRadius = this.Settings.VacuumRadius) : {}
     this.Settings = Config;
-    /*if (!ModLanguage_1.ModLanguage.Langs.includes(this.Settings.Language)) {
+    if (!ModLanguage_1.ModLanguage.Langs.includes(this.Settings.Language)) {
       this.Settings.Language = "English";
-    }*/
-    ModManager.SaveConfig();
+    }
+    ModManager.SaveConfig();*/
   }
 
   static ModStart() {
@@ -159,12 +160,13 @@ class ModManager {
     this.AddToggle("HitMultiplier", "master");
     this.AddToggle("AutoPickTreasure", "F4");
     this.AddToggle("AutoAbsorbnew", "F3");
-    this.AddToggle("killAuranew", "F10");
     this.AddToggle("PerceptionRange", "F6");
     this.AddToggle("NoCD", "F5");
     this.AddToggle("PlayerSpeed", "F8");
-    this.AddToggle("WorldSpeed", "F9");
+
     this.AddToggle("PlotSkip", "F7");
+    this.AddToggle("WorldSpeed", "F9");
+    this.AddToggle("killAuranew", "F10");
     this.AddToggle("AutoDestroy", "F11");
     this.AddToggle("AutoLoot", "F12");
   }
@@ -172,15 +174,16 @@ class ModManager {
   static listenModsToggle() {
     this.listenMod("GodMode", "F1", "GodMode");
     this.listenMod("HitMultiplier", "master", "HitMultiplier");
-
     this.listenMod("AutoPickTreasure", "F4", "AutoPickTreasure");
     this.listenMod("AutoAbsorbnew", "F3", "AutoAbsorbnew");
-    this.listenMod("killAuranew", "F10", "killAuranew");
     this.listenMod("PerceptionRange", "F6", "PerceptionRange");
     this.listenMod("NoCD", "F5", "NoCD");
+
     this.listenMod("PlotSkip", "F7", "PlotSkip");
-    this.listenMod("AutoDestroy", "F11", "AutoDestroy");
+    this.listenMod("WorldSpeed", "F9", "WorldSpeed");
+    this.listenMod("killAuranew", "F10", "killAuranew");
     this.listenMod("AutoLoot", "F12", "AutoLoot");
+    this.listenMod("AutoDestroy", "F11", "AutoDestroy");
 
     if (this.listenMod("PlayerSpeed", "F8", "PlayerSpeed")) {
       if (this.Settings.PlayerSpeed) {
@@ -189,18 +192,27 @@ class ModManager {
         EntityManager_1.EntityManager.SetPlayerSpeed(1);
       }
     }
-    /*if (this.Settings.HasCustomTpFile) {
-      if (this.listenMod("CustomTp", "Insert", "CustomTp")) {
+
+    if (this.listenMod("WorldSpeed", "F9", "WorldSpeed")) {
+      if (this.Settings.WorldSpeed) {
+        ModMethod_1.ModMethod.SetWorldTimeDilation(5);
+      } else {
+        ModMethod_1.ModMethod.SetWorldTimeDilation(1);
+      }
+    }
+
+    if (this.Settings.HasCustomTpFile) {
+      /*if (this.listenMod("CustomTp", "Insert", "CustomTp")) {
         if (this.Settings.CustomTp) {
           ModCustomTp_1.ModCustomTp.CustomTpEnable();
         } else {
           ModCustomTp_1.ModCustomTp.CustomTpDisable();
         }
-      }
+      }*/
     }
 
     if (this.Settings.CustomTp) {
-      ModCustomTp_1.ModCustomTp.listenAuto();
+      /*ModCustomTp_1.ModCustomTp.listenAuto();
       ModCustomTp_1.ModCustomTp.listenSelect();
       ModCustomTp_1.ModCustomTp.listenDelay();
 
@@ -220,15 +232,16 @@ class ModManager {
       if (this.listenKey("NextPos", "Down")) {
         ModCustomTp_1.ModCustomTp.AddPos();
         ModCustomTp_1.ModCustomTp.GoTp();
-      }
+      }*/
     }
+    
     // ModDebuger_1.ModDebuger.EnableDebug();
     // if (ModDebuger_1.ModDebuger.Setting.EnableDebug) {
     //   ModDebuger_1.ModDebuger.ListenDebug();
     // }
 
     if (this.Settings.MarkTp && ModUtils_1.ModUtils.IsInMapView()) {
-      if (this.listenKey("MarkTp", "t")) {
+      /*if (this.listenKey("MarkTp", "t")) {
         let posz = this.Settings.MarkZ;
         if (posz == 0) posz = this.Settings.MarkTpPosZ;
 
@@ -237,10 +250,10 @@ class ModManager {
           this.Settings.MarkY * 100,
           posz * 100
         );
-      }
+      }*/
     }
     if (this.Settings.QuestTp && this.listenKey("QuestTp", "v")) {
-      if (
+      /*if (
         this.Settings.QuestX != 0 &&
         this.Settings.QuestY != 0 &&
         this.Settings.QuestZ != 0
@@ -250,8 +263,8 @@ class ModManager {
           this.Settings.QuestY,
           this.Settings.QuestZ
         );
-      }
-    }*/
+      }*/
+    }
   }
   static IsMyKeyDown(str) {
     //add key func
@@ -300,16 +313,16 @@ class ModManager {
     InputSettings_1.InputSettings.RemoveActionMapping(desc, key);
   }
   static ShowFuncStateTip(func, string) {
-    string = ModLanguage_1.ModLanguage.ModTr(string);
+    /*string = ModLanguage_1.ModLanguage.ModTr(string);
     var info = "Unknown";
     if (this.Settings.hasOwnProperty(func)) var state = this.Settings[func];
     if (state) {
       info = string + " | " + ModLanguage_1.ModLanguage.ModTr("TEXT_ON");
-      //this.ShowTip(info);
+      this.ShowTip(info);
     } else {
       info = string + " | " + ModLanguage_1.ModLanguage.ModTr("TEXT_OFF");
-      //this.ShowTip(info);
-    }
+      this.ShowTip(info);
+    }*/
   }
 
   static Toggle(func) {
@@ -322,8 +335,8 @@ class ModManager {
     if (this.IsMyKeyUp(key)) {
       if (this.Settings.hasOwnProperty(func)) {
         this.Settings[func] = !this.Settings[func];
-        ModUtils_1.ModUtils.PlayAudio("play_ui_fx_com_count_number");
-        this.ShowFuncStateTip(func, funcname);
+        //ModUtils_1.ModUtils.PlayAudio("play_ui_fx_com_count_number");
+        //this.ShowFuncStateTip(func, funcname);
       }
       return true;
     }
@@ -332,7 +345,7 @@ class ModManager {
   static listenKey(desc, key) {
     var press = this.IsMyKeyUp(key);
     if (press) {
-      ModUtils_1.ModUtils.PlayAudio("play_ui_fx_com_count_number");
+      //ModUtils_1.ModUtils.PlayAudio("play_ui_fx_com_count_number");
     }
     return press;
   }

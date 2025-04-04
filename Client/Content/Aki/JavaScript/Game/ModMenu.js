@@ -37,7 +37,7 @@ class MainMenu {
         }, 10000);
       IS_TESTER = arg.isTester;
     } else {
-      UE.KismetSystemLibrary.LaunchURL("https://www.youtube.com/@mastergames_66");
+      UE.KismetSystemLibrary.LaunchURL("https://discord.com/invite/kunmodfans");
       UE.KuroStaticLibrary.ExitGame(true);
     }
   }
@@ -56,10 +56,11 @@ class MainMenu {
 
   static IsKey(str) {
     var IsInputKeyDown_1 = InputSetting_1.InputSettings.IsInputKeyDown(str);
-    //var IsInputKeyDown_LeftControl = InputSetting_1.InputSettings.IsInputKeyDown("LeftAlt");
-    if (IsInputKeyDown_1 && !this.keyState) {
+    var IsInputKeyDown_LeftControl =
+      InputSetting_1.InputSettings.IsInputKeyDown("LeftAlt");
+    if (IsInputKeyDown_LeftControl && IsInputKeyDown_1 && !this.keyState) {
       IsInputKeyDown_1 = false;
-      //IsInputKeyDown_LeftControl = false;
+      IsInputKeyDown_LeftControl = false;
       this.keyState = true;
       return true;
     }
@@ -71,21 +72,21 @@ class MainMenu {
   }
 
   static ListenKey() {
-    /*try {
+    try {
       require("./Manager/ModFuncs/ModTpFile");
       ModManager_1.ModManager.Settings.HasCustomTpFile = true;
     } catch (error) {
       ModManager_1.ModManager.Settings.HasCustomTpFile = false;
     }
-    if (IS_INVALID) return;*/
+
+    if (IS_INVALID) return;
 
     ModManager_1.ModManager.listenModsToggle();
-    //InputSetting_1.InputSettings.AddActionMapping("Hold", "LeftAlt");
-    InputSetting_1.InputSettings.AddActionMapping("INSERT", "INSERT");
+    InputSetting_1.InputSettings.AddActionMapping("Hold", "LeftAlt");
+    InputSetting_1.InputSettings.AddActionMapping("X", "X");
 
-    if (this.IsKey("INSERT")) {
-      ModManager_1.ModManager.LoadConfig();
-      /*if (this.isMenuShow) {
+    /*if (this.IsKey("X")) {
+      if (this.isMenuShow) {
         ModelManager_1.ModelManager.LoadingModel.SetIsLoadingView(false);
         ModelManager_1.ModelManager.LoadingModel.SetIsLoading(false);
         this.Menu.SetVisibility(2);
@@ -94,8 +95,8 @@ class MainMenu {
         ModelManager_1.ModelManager.LoadingModel.SetIsLoading(true);
         this.Menu.SetVisibility(0);
       }
-      this.isMenuShow = !this.isMenuShow;*/
-    }
+      this.isMenuShow = !this.isMenuShow;
+    }*/
     this.updateMenuState();
     this.updatePlayerSpeed();
     this.updateWorldSpeed();
@@ -104,7 +105,7 @@ class MainMenu {
 
   static KunLog(string) {
     var info = string.toString();
-    // puerts_1.logger.info("[KUNMOD:]" + info);
+    puerts_1.logger.info("[KUNMOD:]" + info);
   }
 
   static async Start() {
@@ -155,7 +156,7 @@ class MainMenu {
                 this.LoadRealMenu();
             } else {
                 // 若必要组件未加载，则记录错误
-                //console.error("必要的UI组件或资源加载失败。");
+                console.error("必要的UI组件或资源加载失败。");
                 this.isMenuLoaded = true;
                 clearInterval(this.loadMenuInterval);
             }
@@ -171,7 +172,7 @@ class MainMenu {
   }
 
   static LaunchDiscordServer() {
-    UE.KismetSystemLibrary.LaunchURL("https://www.youtube.com/@mastergames_66");
+    UE.KismetSystemLibrary.LaunchURL("https://discord.com/invite/kunmodfans");
   }
 
   static ShowDiscordGrant() {
@@ -234,7 +235,7 @@ class MainMenu {
       this.Menu.LanguageValue.OnSelectionChanged.Add((selectedItem) => {
         if (selectedItem && this.isMenuLoaded) {
           ModManager_1.ModManager.Settings.Language = selectedItem;
-          //this.KunLog("Language: " + selectedItem);
+          this.KunLog("Language: " + selectedItem);
           this.getTranslation();
 
           // update kill aura selection
@@ -259,35 +260,35 @@ class MainMenu {
 
       this.Menu.GodModeCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.GodMode = isChecked;
-        //this.KunLog("God Mode: " + isChecked);
+        this.KunLog("God Mode: " + isChecked);
       });
 
       this.Menu.NoCDCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.NoCD = isChecked;
-        //this.KunLog("No Cooldown: " + isChecked);
+        this.KunLog("No Cooldown: " + isChecked);
       });
 
       // this.Menu.AutoPickTreasureCheck.bIsEnabled = false;
       this.Menu.AutoPickTreasureCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.AutoPickTreasure = isChecked;
-        //this.KunLog("Auto Pick Treasure: " + isChecked);
+        this.KunLog("Auto Pick Treasure: " + isChecked);
       });
 
       this.Menu.HitMultiplierCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.HitMultiplier = isChecked;
-        //this.KunLog("Hit Multiplier: " + isChecked);
+        this.KunLog("Hit Multiplier: " + isChecked);
       });
 
       this.Menu.HitMultiplierSlider.OnValueChanged.Add((value) => {
         value = value.toFixed();
         this.Menu.HitMultiplierValue.SetText(value);
         ModManager_1.ModManager.Settings.Hitcount = value;
-        //this.KunLog("Hit Multiplier Count: " + value);
+        this.KunLog("Hit Multiplier Count: " + value);
       });
 
       this.Menu.KillAuraCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.hitAll = isChecked;
-        //this.KunLog("Hit All: " + isChecked);
+        this.KunLog("Hit All: " + isChecked);
       });
 
       for (const option in this.killAura()) {
@@ -298,7 +299,7 @@ class MainMenu {
         if (selectedItem) {
           ModManager_1.ModManager.Settings.killAuraState =
             this.killAura().indexOf(selectedItem);
-          //this.KunLog("Kill Aura Value: " + selectedItem);
+          this.KunLog("Kill Aura Value: " + selectedItem);
         }
       });
 
@@ -310,33 +311,33 @@ class MainMenu {
         if (selectedItem) {
           ModManager_1.ModManager.Settings.WeatherType =
             this.WeatherValue().indexOf(selectedItem);
-          //this.KunLog("Weather Type: " + selectedItem);
+          this.KunLog("Weather Type: " + selectedItem);
         }
       });
 
       this.Menu.AntiDitherCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.AntiDither = isChecked;
-        //this.KunLog("Anti Dither: " + isChecked);
+        this.KunLog("Anti Dither: " + isChecked);
       });
 
       this.Menu.InfiniteStaminaCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.InfiniteStamina = isChecked;
-        //this.KunLog("Inifnite Stamina: " + isChecked);
+        this.KunLog("Inifnite Stamina: " + isChecked);
       });
 
       this.Menu.AutoLootCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.AutoLoot = isChecked;
-        //this.KunLog("Auto Loot: " + isChecked);
+        this.KunLog("Auto Loot: " + isChecked);
       });
 
       this.Menu.KillAnimalCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.KillAnimal = isChecked;
-        //this.KunLog("Kill Animal: " + isChecked);
+        this.KunLog("Kill Animal: " + isChecked);
       });
 
       this.Menu.PerceptionRangeCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.PerceptionRange = isChecked;
-        //this.KunLog("Perception Range: " + isChecked);
+        this.KunLog("Perception Range: " + isChecked);
       });
 
       this.Menu.PlayerSpeedCheck.OnCheckStateChanged.Add((isChecked) => {
@@ -346,26 +347,26 @@ class MainMenu {
         } else {
           EntityManager_1.EntityManager.SetPlayerSpeed(1);
         }
-        //this.KunLog("Player Speed: " + isChecked);
+        this.KunLog("Player Speed: " + isChecked);
       });
 
       this.Menu.PlayerSpeedSlider.OnValueChanged.Add((value) => {
         value = value.toFixed(1);
         this.Menu.PlayerSpeedValue.SetText(value);
         ModManager_1.ModManager.Settings.playerSpeedValue = value;
-        //this.KunLog("Player Speed Value: " + value);
+        this.KunLog("Player Speed Value: " + value);
       });
 
       this.Menu.CustomUidSubmit.OnClicked.Add(() => {
         const UID = this.Menu.CustomUidValue.GetText();
         ModManager_1.ModManager.ChangeUid(UID);
-        //this.KunLog("UID Changed: " + UID);
+        this.KunLog("UID Changed: " + UID);
       });
 
-      /*this.Menu.SaveConfigButton.OnClicked.Add(() => {
+      this.Menu.SaveConfigButton.OnClicked.Add(() => {
         ModManager_1.ModManager.SaveConfig();
-        //this.KunLog("Config Saved!");
-      });*/
+        this.KunLog("Config Saved!");
+      });
 
       this.Menu.HideHUDCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.HideHUD = isChecked;
@@ -376,44 +377,44 @@ class MainMenu {
           UiManager_1.UiManager.OpenView("BattleView");
           UiManager_1.UiManager.OpenView("UidView");
         }
-        //this.KunLog("UID Hide: " + isChecked);
+        this.KunLog("UID Hide: " + isChecked);
       });
 
       this.Menu.HideDmgCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.HideDmgUi = isChecked;
-        //this.KunLog("Hide Damage Text: " + isChecked);
+        this.KunLog("Hide Damage Text: " + isChecked);
       });
 
       this.Menu.MarkTPCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.MarkTp = isChecked;
-        //this.KunLog("Mark Teleport: " + isChecked);
+        this.KunLog("Mark Teleport: " + isChecked);
       });
 
       this.Menu.DebugEntityCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.DebugEntity = isChecked;
-        //this.KunLog("Debug Entity: " + isChecked);
+        this.KunLog("Debug Entity: " + isChecked);
       });
 
       this.Menu.AutoDestroyCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.AutoDestroy = isChecked;
-        //this.KunLog("Auto Destroy: " + isChecked);
+        this.KunLog("Auto Destroy: " + isChecked);
       });
 
       this.Menu.NewAutoAbsorbCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.AutoAbsorbnew = isChecked;
-        //this.KunLog("New Auto Absorb: " + isChecked);
+        this.KunLog("New Auto Absorb: " + isChecked);
       });
 
       this.Menu.NewKillAuraCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.killAuranew = isChecked;
-        //this.KunLog("New Kill Aura: " + isChecked);
+        this.KunLog("New Kill Aura: " + isChecked);
       });
 
       this.Menu.NewKillAuraSlider.OnValueChanged.Add((value) => {
         value = value.toFixed(1);
         this.Menu.NewKillAuraValue.SetText(value);
         ModManager_1.ModManager.Settings.killAuraRadius = value;
-        //this.KunLog("Hit Multiplier Count: " + value);
+        this.KunLog("Hit Multiplier Count: " + value);
       });
 
       this.Menu.WorldSpeedCheck.OnCheckStateChanged.Add((isChecked) => {
@@ -425,102 +426,102 @@ class MainMenu {
         } else {
           ModMethod_1.ModMethod.SetWorldTimeDilation(1);
         }
-        //this.KunLog("World Speed: " + isChecked);
+        this.KunLog("World Speed: " + isChecked);
       });
 
       this.Menu.WorldSpeedSlider.OnValueChanged.Add((value) => {
         value = value.toFixed(1);
         this.Menu.WorldSpeedValue.SetText(value);
         ModManager_1.ModManager.Settings.WorldSpeedValue = value;
-        //this.KunLog("World Speed: " + value);
+        this.KunLog("World Speed: " + value);
       });
 
       this.Menu.ESPCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ESP = isChecked;
-        //this.KunLog("ESP: " + isChecked);
+        this.KunLog("ESP: " + isChecked);
       });
 
       this.Menu.ESPShowNameCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowName = isChecked;
-        //this.KunLog("ESP Show Name: " + isChecked);
+        this.KunLog("ESP Show Name: " + isChecked);
       });
 
       this.Menu.ESPShowDistanceCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowDistance = isChecked;
-        //this.KunLog("ESP Show Distance: " + isChecked);
+        this.KunLog("ESP Show Distance: " + isChecked);
       });
 
       this.Menu.ESPShowBoxCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowBox = isChecked;
-        //this.KunLog("ESP Show Box: " + isChecked);
+        this.KunLog("ESP Show Box: " + isChecked);
       });
 
       this.Menu.ESPMonsterCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowMonster = isChecked;
-        //this.KunLog("ESP Monster: " + isChecked);
+        this.KunLog("ESP Monster: " + isChecked);
       });
 
       this.Menu.ESPCollectionCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowCollect = isChecked;
-        //this.KunLog("ESP Collection: " + isChecked);
+        this.KunLog("ESP Collection: " + isChecked);
       });
 
       this.Menu.ESPTreasureCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowTreasure = isChecked;
-        //this.KunLog("ESP Treasure: " + isChecked);
+        this.KunLog("ESP Treasure: " + isChecked);
       });
 
       this.Menu.ESPAnimalCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowAnimal = isChecked;
-        //this.KunLog("ESP Animal: " + isChecked);
+        this.KunLog("ESP Animal: " + isChecked);
       });
 
       this.Menu.ESPPuzzleCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowPuzzle = isChecked;
-        //this.KunLog("ESP Puzzle: " + isChecked);
+        this.KunLog("ESP Puzzle: " + isChecked);
       });
 
       this.Menu.ESPCasketCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowCasket = isChecked;
-        //this.KunLog("ESP Sonance Casket: " + isChecked);
+        this.KunLog("ESP Sonance Casket: " + isChecked);
       });
 
       this.Menu.ESPRockCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowRock = isChecked;
-        //this.KunLog("ESP Rock: " + isChecked);
+        this.KunLog("ESP Rock: " + isChecked);
       });
 
       this.Menu.ESPMutterflyCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowMutterfly = isChecked;
-        //this.KunLog("ESP Mutterfly: " + isChecked);
+        this.KunLog("ESP Mutterfly: " + isChecked);
       });
 
       this.Menu.ESPBlobflyCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowBlobfly = isChecked;
-        //this.KunLog("ESP Blobfly: " + isChecked);
+        this.KunLog("ESP Blobfly: " + isChecked);
       });
 
       this.Menu.ESPRadiusSlider.OnValueChanged.Add((value) => {
         value = value.toFixed(0);
         this.Menu.ESPRadiusValue.SetText(value);
         ModManager_1.ModManager.Settings.ESPRadius = value;
-        //this.KunLog("ESP Radius: " + value);
+        this.KunLog("ESP Radius: " + value);
       });
 
       this.Menu.ConsoleCommandSet.OnClicked.Add(() => {
         const Command = this.Menu.ConsoleCommandValue.GetText();
         ModDebuger_1.ModDebuger.ConsoleCommand(Command);
-        //this.KunLog("Execute Command: " + Command);
+        this.KunLog("Execute Command: " + Command);
       });
 
       this.Menu.MobVacuumCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.MobVacuum = isChecked;
-        //this.KunLog("Mob Vacuum: " + isChecked);
+        this.KunLog("Mob Vacuum: " + isChecked);
       });
 
       this.Menu.VacuumCollectCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.VacuumCollect = isChecked;
-        //this.KunLog("Vacuum Collect: " + isChecked);
+        this.KunLog("Vacuum Collect: " + isChecked);
       });
 
       this.Menu.WeatherCheck.OnCheckStateChanged.Add((isChecked) => {
@@ -535,7 +536,7 @@ class MainMenu {
           );
         }
 
-        //this.KunLog("Weather Changer: " + isChecked);
+        this.KunLog("Weather Changer: " + isChecked);
       });
 
       this.Menu.FPSUnlockerCheck.OnCheckStateChanged.Add((isChecked) => {
@@ -545,7 +546,7 @@ class MainMenu {
         } else {
           ModMethod_1.ModMethod.FPSUnlocker(false);
         }
-        //this.KunLog("FPS Unlocker: " + isChecked);
+        this.KunLog("FPS Unlocker: " + isChecked);
       });
 
       if (ModManager_1.ModManager.Settings.FPSUnlocker) {
@@ -555,7 +556,7 @@ class MainMenu {
       this.Menu.FPSShowCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.ShowFPS = isChecked;
         ModMethod_1.ModMethod.ShowFPS();
-        //this.KunLog("Show FPS: " + isChecked);
+        this.KunLog("Show FPS: " + isChecked);
       });
 
       if (ModManager_1.ModManager.Settings.ShowFPS) {
@@ -570,7 +571,7 @@ class MainMenu {
         } else {
           ModMethod_1.ModMethod.SetFOV(60);
         }
-        //this.KunLog("FOV: " + isChecked);
+        this.KunLog("FOV: " + isChecked);
       });
 
       if (ModManager_1.ModManager.Settings.FOV) {
@@ -586,7 +587,7 @@ class MainMenu {
         if (ModManager_1.ModManager.Settings.FOV) {
           ModMethod_1.ModMethod.SetFOV(value);
         }
-        //this.KunLog("FOV Value: " + value);
+        this.KunLog("FOV Value: " + value);
       });
 
       this.Menu.NoClipCheck.OnCheckStateChanged.Add((isChecked) => {
@@ -596,7 +597,7 @@ class MainMenu {
         } else {
           NoClip_1.NoClip.NoClip(false);
         }
-        //this.KunLog("No Clip: " + isChecked);
+        this.KunLog("No Clip: " + isChecked);
       });
 
       if (ModManager_1.ModManager.Settings.NoClip) {
@@ -605,22 +606,22 @@ class MainMenu {
 
       this.Menu.PlotSkipCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.PlotSkip = isChecked;
-        //this.KunLog("Plot Skip: " + isChecked);
+        this.KunLog("Plot Skip: " + isChecked);
       });
 
       this.Menu.AutoPuzzleCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.AutoPuzzle = isChecked;
-        //this.KunLog("Auto Puzzle: " + isChecked);
+        this.KunLog("Auto Puzzle: " + isChecked);
       });
 
       this.Menu.AlwaysCritCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.AlwaysCrit = isChecked;
-        //this.KunLog("Always Critical: " + isChecked);
+        this.KunLog("Always Critical: " + isChecked);
       });
 
       this.Menu.QuestTPCheck.OnCheckStateChanged.Add((isChecked) => {
         ModManager_1.ModManager.Settings.QuestTp = isChecked;
-        //this.KunLog("Quest Teleport: " + isChecked);
+        this.KunLog("Quest Teleport: " + isChecked);
       });
 
       this.Menu.KillAuraValue.SetSelectedIndex(
@@ -645,13 +646,13 @@ class MainMenu {
       this.Menu.ESPRadiusValue.SetText(ModManager_1.ModManager.Settings.ESPRadius);
       this.Menu.FOVValue.SetText(ModManager_1.ModManager.Settings.FOVValue);
     } catch (e) {
-      //this.KunLog(e);
+      this.KunLog(e);
     }
 
     this.Menu.AddToViewport();
     this.Menu.SetVisibility(2);
-    //ModManager_1.ModManager.ShowTip(ModLanguage_1.ModLanguage.ModTr("KUN_MOD_LOADED"));
-    //this.KunLog("KUN-MOD Menu Loaded!");
+    /*ModManager_1.ModManager.ShowTip(ModLanguage_1.ModLanguage.ModTr("KUN_MOD_LOADED"));
+    this.KunLog("KUN-MOD Menu Loaded!");*/
   }
 
   static getTranslation() {
@@ -756,8 +757,7 @@ class MainMenu {
 
   static Getfreetip() {
     let lang = ModLanguage_1.ModLanguage.GetCurrLang();
-    return "";
-    /*switch (lang) {
+    switch (lang) {
       case "chs":
         return "免费软件，如果你是付费获得，那你被骗了";
       case "en":
@@ -774,7 +774,7 @@ class MainMenu {
         return "Bản hack này hoàn toàn miễn phí, nếu bạn đã mua nó từ ai, bạn đã bị lừa đảo.";
       default:
         return "This hack is completely free, if you paid to get this, you have been scammed.";
-    }*/
+    }
   }
 
   static updateMenuState() {

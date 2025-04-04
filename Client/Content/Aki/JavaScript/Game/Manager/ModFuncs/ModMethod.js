@@ -41,7 +41,6 @@ class ModMethod {
         ];
         BulletConfig_1.BulletConfig.N9o.forEach((firstValue, PID, map) => {
             if (!this.best[PID]) {
-                ModMenu_1.MainMenu.KunLog("Scanning for: " + PID);
                 let bestDmg = null;
                 let quietDmg = null;
                 let highest = 0;
@@ -50,9 +49,7 @@ class ModMethod {
                     try {
                         if (value.Base.DamageId > 1) {
                             let dam = ConfigManager_1.ConfigManager.RoleConfig.GetDamageConfig(value.Base.DamageId)
-                        
-                            ModMenu_1.MainMenu.KunLog(`${value.BulletName}: ${key} | BulletRowName: ${value.BulletRowName} BaseDamageId: ${value.Base.DamageId}`);
-                            
+
                             if (!value.Base.EnablePartHitAudio) {
                                 quietDmg = {'key': key, 'BaseDamageId': BigInt(value.Base.DamageId)};
                             }
@@ -72,10 +69,7 @@ class ModMethod {
                     } catch {}
                 });
                 if (bestDmg && quietDmg) {
-                    ModMenu_1.MainMenu.KunLog(`Scan finished for ${PID} bestDmg: ${bestDmg.key} quietDmg: ${quietDmg.key}`);
                     this.best[PID] = [quietDmg, bestDmg]
-                } else {
-                    ModMenu_1.MainMenu.KunLog("Failed scan for: " + PID);
                 }
             }
         });
@@ -96,7 +90,6 @@ class ModMethod {
         let transformLoc = InitialTransform.GetLocation();
         let bul = ModelManager_1.ModelManager.BulletModel.CreateBullet(EntityManager_1.EntityManager.GetPlayerEntity(), (this.best[PID][0].key).toString(), InitialTransform, transformLoc);
         if (!bul) {
-            ModMenu_1.MainMenu.KunLog(`Bullet failed for id ${(this.best[PID][0].key).toString()}`);
             return;
         }
         bul.GetBulletInfo().ActorComponent.SetActorLocation(transformLoc);
@@ -106,29 +99,37 @@ class ModMethod {
   //怪物淹死
   static MonsterKillRequest(Entity) {
     //v1.20
+    // update here
+    // let prot = Protocol_1.Aki.Protocol.v4n.create()
+    // prot.e8n = entity.GetComponent(3).ActorLocationProxy
+
+    // CombatMessage_1.CombatNet.Call(
+    //     18989 /*NetDefine_1.ERequestMessageId.MonsterDrownRequest*/,
+    //     entity,
+    //     prot
+    // );
+
     let timer = null;
     let its = 0;
     let itsLimit = 10;
     
-    if (!Entity.GetComponent(3) && Entity.GetComponent(18) && Entity.GetComponent(34) && Entity.GetComponent(61)) {
+    if (!Entity.GetComponent(3) && Entity.GetComponent(18) && Entity.GetComponent(33) && Entity.GetComponent(60)) {
         return;
     }
-    let entityPos = Entity.GetComponent(3).ActorLocationProxy;
-    let CharacterPartComponent = Entity.GetComponent(61);
-    let CharacterDamageComponent = Entity.GetComponent(18);
-    let PID = EntityManager_1.EntityManager.GetPlayerEntity().Id;
-    timer = TimerSystem_1.TimerSystem.Forever(() => {
+    const entityPos = Entity.GetComponent(3).ActorLocationProxy;
+    const CharacterPartComponent = Entity.GetComponent(60);
+    const CharacterDamageComponent = Entity.GetComponent(18);
+    const PID = EntityManager_1.EntityManager.GetPlayerEntity().Id;
+    timer = setInterval(() => {
         if (!CharacterDamageComponent.Entity || its > itsLimit) {
-            ModMenu_1.MainMenu.KunLog(its > itsLimit ? "Hits over limit" : "Dead, clearing timer"); 
-            TimerSystem_1.TimerSystem.Remove(timer);
+            clearInterval(timer);
             return;
         }
 
         its++;
-        if (CharacterDamageComponent && Entity.GetComponent(34) && entityPos) {
+        if (CharacterDamageComponent && Entity.GetComponent(33) && entityPos) {
             if (!CharacterPartComponent) {
-                ModMenu_1.MainMenu.KunLog("Failed to find CharacterPartComponent"); 
-                TimerSystem_1.TimerSystem.Remove(timer);
+                clearInterval(timer);
                 return;
             }
             CharacterPartComponent.OnInitData();
@@ -137,8 +138,7 @@ class ModMethod {
 
             let bul = this.SpawnBullet();
             if (!bul) {
-                ModMenu_1.MainMenu.KunLog("Failed to spawn bullet, clearing timer"); 
-                TimerSystem_1.TimerSystem.Remove(timer);
+                clearInterval(timer);
                 return;
             }
             let BulletInfo = bul.GetBulletInfo();

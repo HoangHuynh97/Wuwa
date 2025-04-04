@@ -15,6 +15,7 @@ const puerts_1 = require("puerts"),
   PublicUtil_1 = require("../../Common/PublicUtil"),
   EntitySystem_1 = require("../../../Core/Entity/EntitySystem");
 
+  // obfuscated variable here! gXr
 class EntityManager {
   static GetEntitybyId(entityId) {
     return EntitySystem_1.EntitySystem.Get(entityId);
@@ -42,21 +43,20 @@ class EntityManager {
 
   static GetEntityType(entity) {
     let type = entity.Entity.GetComponent(0).GetEntityType();
-    if (type == Protocol_1.Aki.Protocol.kks.Proto_Player) return "Player";
-    if (type == Protocol_1.Aki.Protocol.kks.Proto_Npc) return "Npc";
-    if (type == Protocol_1.Aki.Protocol.kks.Proto_Monster) return "Monster";
-    if (type == Protocol_1.Aki.Protocol.kks.Proto_SceneItem)
+    if (type == Protocol_1.Aki.Protocol.HBs.Proto_Player) return "Player";
+    if (type == Protocol_1.Aki.Protocol.HBs.Proto_Npc) return "Npc";
+    if (type == Protocol_1.Aki.Protocol.HBs.Proto_Monster) return "Monster";
+    if (type == Protocol_1.Aki.Protocol.HBs.Proto_SceneItem)
       return "SceneItem";
-    if (type == Protocol_1.Aki.Protocol.kks.Proto_Vision) return "Vision";
-    if (type == Protocol_1.Aki.Protocol.kks.Proto_Animal) return "Animal";
-    if (type == Protocol_1.Aki.Protocol.kks.Proto_Custom) return "Custom";
+    if (type == Protocol_1.Aki.Protocol.HBs.Proto_Vision) return "Vision";
+    if (type == Protocol_1.Aki.Protocol.HBs.Proto_Animal) return "Animal";
+    if (type == Protocol_1.Aki.Protocol.HBs.Proto_Custom) return "Custom";
   }
 
   static GetPosition(Entity) {
     let a = Entity.GetComponent(1);
-    // let actor = a.ActorInternal;
-    // let pos = actor.K2_GetActorLocation();
-    let pos = a?.Owner.K2_GetActorLocation();
+    let actor = a.ActorInternal;
+    let pos = actor.K2_GetActorLocation();
 
     return pos;
   }
@@ -127,6 +127,7 @@ class EntityManager {
     }
     let monster = false;
     try {
+        // CreatureDataComponent
         monster = entity.Entity.GetComponent(0).IsRealMonster();
     } catch {
 

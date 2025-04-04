@@ -1,1 +1,56 @@
-'use strict';var a0_0x52c667=a0_0x2d41,a0_0x5f52d9=a0_0x2d41,a0_0x272297=a0_0x2d41;(function(_0x3e0dd2,_0x3086dd){var _0x528535=a0_0x2d41,_0x241a7d=a0_0x2d41,_0x312658=a0_0x2d41,_0x3e56d5=_0x3e0dd2();while(!![]){try{var _0x40a897=-parseInt(_0x528535(0x1c8))/0x1*(parseInt(_0x241a7d(0x1ac))/0x2)+parseInt(_0x312658(0x1b0))/0x3+-parseInt(_0x312658(0x1af))/0x4+-parseInt(_0x312658(0x1cd))/0x5*(parseInt(_0x528535(0x1c2))/0x6)+parseInt(_0x241a7d(0x1ca))/0x7+parseInt(_0x312658(0x1b7))/0x8+parseInt(_0x312658(0x1c7))/0x9;if(_0x40a897===_0x3086dd)break;else _0x3e56d5['push'](_0x3e56d5['shift']());}catch(_0x403664){_0x3e56d5['push'](_0x3e56d5['shift']());}}}(a0_0x23ed,0xf2f5d));Object[a0_0x52c667(0x1b6)](exports,'__esModule',{'value':!0x0}),exports[a0_0x52c667(0x1aa)]=void 0x0;const cpp_1=require('cpp'),UE=require('ue'),ue_1=require('ue'),Log_1=require(a0_0x52c667(0x1c6)),Protocol_1=require('../../Core/Define/Net/Protocol'),Net_1=require(a0_0x52c667(0x1b9)),TimerSystem_1=require('../../Core/Timer/TimerSystem'),BaseConfigController_1=require('../../Launcher/BaseConfig/BaseConfigController'),Platform_1=require('../../Launcher/Platform/Platform'),ACE_DATA_TRANSFER_INTERVAL_PC=0x64,ACE_DATA_TRANSFER_INTERVAL_MOBILE=0xfa0;class ThirdPartySdkManager{static[a0_0x272297(0x1cc)](){var _0x568a8d=a0_0x5f52d9,_0x1bbb09=a0_0x272297,_0x32897c=a0_0x5f52d9,_0x246e01=BaseConfigController_1['BaseConfigController']['GetPackageConfigOrDefault']('Stream'),_0x54fdb3=BaseConfigController_1['BaseConfigController'][_0x568a8d(0x1c4)](_0x1bbb09(0x1b3),''),_0x246e01=(cpp_1[_0x32897c(0x1bd)][_0x568a8d(0x1ab)](_0x246e01,_0x54fdb3),UE['KuroStaticLibrary'][_0x568a8d(0x1ba)](_0x568a8d(0x1bc)));_0x246e01&&(void 0x0!==ThirdPartySdkManager['BBe']&&(TimerSystem_1[_0x568a8d(0x1b2)]['Remove'](ThirdPartySdkManager['BBe']),ThirdPartySdkManager[_0x568a8d(0x1b4)]=void 0x0),ThirdPartySdkManager['InitDataTransferTimerForTpSafe'](),Net_1[_0x32897c(0x1bf)][_0x32897c(0x1cb)](0x58c9,ThirdPartySdkManager[_0x32897c(0x1c0)])),Platform_1['Platform']['IsAndroidPlatform']()&&(_0x54fdb3=UE['KuroAudioStatics'][_0x568a8d(0x1c1)](),cpp_1['FCrashSightProxy']['SetCustomData'](_0x568a8d(0x1c3),_0x54fdb3?_0x32897c(0x1c9):_0x1bbb09(0x1b5))),this['rPn']();}static['rPn'](){}static['SetUserInfo'](_0xa2d2aa){''!==_0xa2d2aa&&ThirdPartySdkManager['qBe'](_0xa2d2aa);}static[a0_0x5f52d9(0x1ad)](_0x3a20bf){}static[a0_0x272297(0x1bb)](_0x239737,_0x4463fd){var _0xf6b1de=a0_0x5f52d9,_0x40b938=a0_0x272297,_0x52eadd;UE['KuroStaticLibrary']['IsModuleLoaded']('TpSafe')&&(_0x52eadd=ThirdPartySdkManager['GBe'](),ue_1[_0xf6b1de(0x1ae)][_0xf6b1de(0x1be)](_0x52eadd,0x0,_0x239737,_0x4463fd));}static['InitDataTransferTimerForTpSafe'](){var _0x508671=a0_0x52c667,_0x52f8fd=a0_0x52c667,_0xd8d687=a0_0x272297;let _0x36e1bd=ACE_DATA_TRANSFER_INTERVAL_MOBILE;Platform_1[_0x508671(0x1b1)][_0x508671(0x1ce)]()&&(_0x36e1bd=ACE_DATA_TRANSFER_INTERVAL_PC),ThirdPartySdkManager[_0xd8d687(0x1b4)]=TimerSystem_1['TimerSystem'][_0x508671(0x1c5)](()=>{var _0x3cc07e=_0xd8d687;ThirdPartySdkManager[_0x3cc07e(0x1b8)]();},_0x36e1bd);}static[a0_0x52c667(0x1b8)](){}static['GBe'](){var _0x30e93a=a0_0x52c667;return Platform_1['Platform'][_0x30e93a(0x1ce)]()?0x259:0x63;}static['Logout'](){var _0x1057da=a0_0x52c667;ue_1[_0x1057da(0x1ae)]['Logout']();}}function a0_0x23ed(){var _0x1a80fc=['168801gRQoas','Platform','TimerSystem','Changelist','BBe','AAudio','defineProperty','5279408QeXEVd','NBe','../../Core/Net/Net','IsModuleLoaded','SetUserInfoForTpSafe','TpSafe','FCrashSightProxy','SetUserInfo','Net','bBe','IsAndroidApiUsingOpenSL','6JpEtFP','AudioAPI','GetPackageConfigOrDefault','Forever','../../Core/Common/Log','27411354JqCtLf','113182GYzakt','OpenSL','2429539bSYIoa','Register','Init','7035185XDldVn','IsWindowsPlatform','ThirdPartySdkManager','SetBranchInfo','22ZzrPQb','qBe','TpSafeProxy','1847088TXlyvg'];a0_0x23ed=function(){return _0x1a80fc;};return a0_0x23ed();}function a0_0x2d41(_0xfcdf33,_0x2fc3ec){var _0x23ed79=a0_0x23ed();return a0_0x2d41=function(_0x2d4121,_0x389b7f){_0x2d4121=_0x2d4121-0x1aa;var _0x449953=_0x23ed79[_0x2d4121];return _0x449953;},a0_0x2d41(_0xfcdf33,_0x2fc3ec);}(exports[a0_0x5f52d9(0x1aa)]=ThirdPartySdkManager)[a0_0x272297(0x1b4)]=void 0x0,ThirdPartySdkManager['bBe']=_0x29d880=>{ue_1['TpSafeProxy']['RecvAntiData'](_0x29d880['v6n']);};
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: !0
+}), exports.ThirdPartySdkManager = void 0;
+const cpp_1 = require("cpp"),
+    UE = require("ue"),
+    ue_1 = require("ue"),
+    Log_1 = require("../../Core/Common/Log"),
+    Protocol_1 = require("../../Core/Define/Net/Protocol"),
+    Net_1 = require("../../Core/Net/Net"),
+    TimerSystem_1 = require("../../Core/Timer/TimerSystem"),
+    BaseConfigController_1 = require("../../Launcher/BaseConfig/BaseConfigController"),
+    ACE_DATA_TRANSFER_INTERVAL_PC = 100,
+    ACE_DATA_TRANSFER_INTERVAL_MOBILE = 4e3;
+class ThirdPartySdkManager {
+    static Init() {
+        var e = BaseConfigController_1.BaseConfigController.GetPackageConfigOrDefault("Stream"),
+            r = BaseConfigController_1.BaseConfigController.GetPackageConfigOrDefault("Changelist", ""),
+            e = (cpp_1.FCrashSightProxy.SetBranchInfo(e, r), UE.KuroStaticLibrary.IsModuleLoaded("TpSafe")),
+            r = (e && (void 0 !== ThirdPartySdkManager.BBe && (TimerSystem_1.TimerSystem.Remove(ThirdPartySdkManager.BBe), ThirdPartySdkManager.BBe = void 0), ThirdPartySdkManager.InitDataTransferTimerForTpSafe(), Net_1.Net.Register(3514, ThirdPartySdkManager.bBe)), UE.GameplayStatics.GetPlatformName());
+        "Android" === r && (e = UE.KuroAudioStatics.IsAndroidApiUsingOpenSL(), cpp_1.FCrashSightProxy.SetCustomData("AudioAPI", e ? "OpenSL" : "AAudio")), this.rPn()
+    }
+    static rPn() {
+        var e = UE.BlueprintPathsLibrary.ProjectSavedDir() + "crashes/trigger";
+        UE.BlueprintPathsLibrary.FileExists(e) && (Log_1.Log.CheckError() && Log_1.Log.Error("Login", 22, "崩溃测试！"), cpp_1.FCrashSightProxy.Test())
+    }
+    static SetUserInfo(e) {
+        "" !== e && ThirdPartySdkManager.qBe(e)
+    }
+    static qBe(e) {
+        cpp_1.FCrashSightProxy.SetUserId(e)
+    }
+    static SetUserInfoForTpSafe(e, r) {
+        var t;
+        cpp_1.FCrashSightProxy.SetCustomData("PlayerId", r.toString()), UE.KuroStaticLibrary.IsModuleLoaded("TpSafe") && (t = ThirdPartySdkManager.GBe(), ue_1.TpSafeProxy.SetUserInfo(t, 0, e, r))
+    }
+    static InitDataTransferTimerForTpSafe() {
+        let e = ACE_DATA_TRANSFER_INTERVAL_MOBILE;
+        "Windows" === UE.GameplayStatics.GetPlatformName() && (e = ACE_DATA_TRANSFER_INTERVAL_PC), ThirdPartySdkManager.BBe = TimerSystem_1.TimerSystem.Forever(() => {
+            ThirdPartySdkManager.NBe()
+        }, e)
+    }
+    static NBe() {
+        // var e, r;
+        // Net_1.Net.IsServerConnected() && 0 < (e = ue_1.TpSafeProxy.GetAntiData()).byteLength && ((r = Protocol_1.Aki.Protocol.e$n.create())._6n = new Uint8Array(e), Net_1.Net.Send(4213, r))
+    }
+    static GBe() {
+        return "Windows" === UE.GameplayStatics.GetPlatformName() ? 601 : 99
+    }
+    static Logout() {
+        ue_1.TpSafeProxy.Logout()
+    }
+}(exports.ThirdPartySdkManager = ThirdPartySdkManager).BBe = void 0, ThirdPartySdkManager.bBe = e => {
+    ue_1.TpSafeProxy.RecvAntiData(e._6n)
+};
+//# sourceMappingURL=ThirdPartySdkManager.js.map
